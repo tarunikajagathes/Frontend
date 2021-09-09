@@ -1,0 +1,25 @@
+<h2 style="text-align:center ;color: cadetblue; "><i>Basket</i></h2>
+<div style="float:left; margin: 2%;">
+  <button class="btn"
+    style="margin-right:3%; background-color:rgb(56, 125, 128);border:rgb(56, 125, 128);box-shadow: none; color:white; width:150px"
+    (click)="clear()">Clear Basket</button>
+  <p></p>
+  <button class="btn"
+    style="margin-right:3%; background-color:rgb(56, 125, 128);border:rgb(56, 125, 128);box-shadow: none; color: white; width:150px"
+    (click)="checkout()">CheckOut</button>
+</div>
+<br>
+<br>
+<h4 style="color: cadetblue;">{{this.noitems}}</h4>
+<div class="row" *ngFor="let detail of uItems">
+  <div class="col-md-2" *ngFor="let item of detail.items">
+    <img src="{{item.image}}" alt="Mango" style="width: 100%;">
+    <h6>{{item.name}}</h6>
+    <div class="inner">
+      <p>MRP {{item.price}}</p>
+      <p>Qantity: <button class="btn btn-light" style="padding:0%" (click)="inc(item.name)">+</button> {{item.qty}}
+        <button class="btn btn-light" style="padding:0%" (click)="dec(item.name)">-</button></p>
+      <button style="margin-left:25%;" class="btn btn-light" (click)="remove(item.name)">Remove</button>
+    </div>
+  </div>
+</div>

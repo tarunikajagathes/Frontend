@@ -7,4 +7,20 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Frontend';
+  noUser:boolean=true;
+
+
+  Logout(){
+    sessionStorage.removeItem('currentUser');
+    sessionStorage.removeItem('email');
+    this.noUser=true;
+  }
+
+  public login(){
+    return sessionStorage.getItem('currentUser')
+  }
+  public reload(){
+    window.location.reload
+  }
+    
 }

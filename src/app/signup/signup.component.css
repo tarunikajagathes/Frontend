@@ -1,0 +1,15 @@
+.row{
+    margin-top: 40px;
+    padding:20px;
+    border-radius: 15px;
+    width:400px;
+    margin-left: 35%;
+    background-color: lightgray;
+    border-color: 2px solid black;
+}
+
+
+.form-control.ng-touched.ng-invalid{
+    border:1px solid red;
+    box-shadow: 1px 1px 1px 1px red;
+}

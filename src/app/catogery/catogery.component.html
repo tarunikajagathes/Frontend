@@ -1,0 +1,42 @@
+<div class="container">
+  <h2 style="text-align:center ;color: cadetblue;"><i>{{this.type}}</i></h2>
+  <br>
+  <div class="dropdown" style="margin: 10px;">
+    <button class="btn btn-secondary dropdown-toggle"
+      style="margin-right:3%; background-color:rgb(56, 125, 128);border:rgb(56, 125, 128);box-shadow: none;"
+      type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+      Sort Price
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      <li><button class="dropdown-item" type="button" (click)="high()">High to Low</button></li>
+      <li><button class="dropdown-item" type="button" (click)="low()">Low to High</button></li>
+      <li><button class="dropdown-item" type="button" (click)="none()">None</button></li>
+    </ul>
+    <button class="btn btn-secondary dropdown-toggle" type="button"
+      style="margin-right:3%; background-color:rgb(56, 125, 128);border:rgb(56, 125, 128);box-shadow: none;"
+      id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+      Range
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      <li><button class="dropdown-item" type="button" (click)="range('1-50')">1-50</button></li>
+      <li><button class="dropdown-item" type="button" (click)="range('51-100')">51-100</button></li>
+      <li><button class="dropdown-item" type="button" (click)="range('101-200')">101-200</button></li>
+      <li><button class="dropdown-item" type="button" (click)="noneRange()">None</button></li>
+    </ul>
+  </div>
+  <br>
+  <h4 style="color: cadetblue;">{{this.noitems}}</h4>
+  <div class="row">
+    <div class="col-3" *ngFor="let detail of details">
+      <img src="{{detail.image}}" alt="fruits" style="width:70%">
+      <p><b>{{detail.name}} Qty: {{detail.qty}}</b></p>
+      <div class="inner">
+        <h6>Rs.{{detail.price}}</h6>
+        <h6><i>{{this.delivery}}</i></h6>
+        <div class="col-md-12 text-center">
+          <button class="btn btn-light btn-center" (click)="addToCart(detail.name)">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

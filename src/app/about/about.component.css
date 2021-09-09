@@ -1,0 +1,11 @@
+.row{
+    margin-top: 40px;
+    padding:20px;
+    width:400px;
+    margin-left: 35%;
+}
+button{
+    background-color: cadetblue;
+    color: white;
+    border:white
+}
