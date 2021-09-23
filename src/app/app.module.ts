@@ -20,6 +20,7 @@ import { UserNotloginedService } from './services/user-notlogined.service';
 import { CatogeryComponent } from './catogery/catogery.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    RouterModule,
     ReactiveFormsModule,
     HttpClientModule,
     NgxSpinnerModule,

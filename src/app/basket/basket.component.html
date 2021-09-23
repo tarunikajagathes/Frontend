@@ -18,7 +18,7 @@
     <div class="inner">
       <p>MRP {{item.price}}</p>
       <p>Qantity: <button class="btn btn-light" style="padding:0%" (click)="inc(item.name)">+</button> {{item.qty}}
-        <button class="btn btn-light" style="padding:0%" (click)="dec(item.name)">-</button></p>
+        <button class="btn btn-light" style="padding:0%;" (click)="dec(item.name)">-</button></p>
       <button style="margin-left:25%;" class="btn btn-light" (click)="remove(item.name)">Remove</button>
     </div>
   </div>

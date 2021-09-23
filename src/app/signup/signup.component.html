@@ -12,10 +12,9 @@
           Required!!</small>
         <small id="UserHelp" style="color: red;"
           *ngIf="signinForm.controls.email.invalid&&signinForm.controls.email.dirty">Invalid Email!!</small>
-        <small style="color: red;" *ngIf="emailAlredyExist != ''; else elseBlock">
+        <small style="color: red;" *ngIf="emailAlredyExist != ''">
           {{emailAlredyExist}}
         </small>
-        <ng-template id="emailHelp" class="form-text text-muted" #elseBlock></ng-template>
       </div>
       <div class="form-group">
         <label>First Name</label>
@@ -58,16 +57,18 @@
           *ngIf="signinForm.controls.cpassword.touched&&!signinForm.controls.cpassword.dirty">Confirm Password
           Required!!</small>
         <small id="CpassHelp" style="color: red;"
-          *ngIf="(signinForm.controls.cpassword.dirty)&&(signinForm.controls.password.value!=signinForm.controls.cpassword.value)">Should
+          *ngIf="(signinForm.controls.cpassword.dirty)&&(signinForm.controls.cpassword.errors?.confirmPassword)">Should
           be same as Password</small>
       </div>
       <br>
       <div class="form-group" style="text-align:center">
         <button type="button" class="btn btn-dark" (click)="signin()"
-          [disabled]="signinForm.invalid||(signinForm.controls.password.value!=signinForm.controls.cpassword.value)||(emailAlredyExist != '')">Sign
+          [disabled]="signinForm.invalid||(emailAlredyExist != '')">Sign
           Up</button>
       </div>
-      <br><small>Already have an Account? <a routerLink="/Login" class="link-dark">Login</a></small>
+      <div  style="text-align: center;">
+      <small>Already have an Account? <a routerLink="/Login" class="link-dark">Login</a></small>
+      </div>
     </form>
   </div>
 </div>

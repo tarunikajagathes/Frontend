@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark navbar-text-#C5CBE3 bg-dark">
   <div class="container-fluid">
-    <img src="favicon.ico" width="30" height="30" class="d-inline-block align-top" alt="icon">
+    <img src="favicon.ico" width="30" height="30" style="margin-bottom:5px; margin-right: 5px;" class="d-inline-block align-top" alt="icon">
     <h3 class="navbar-brand">Fresh Choice</h3>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -15,9 +15,9 @@
             Catogery
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item"  [queryParams]="{type:'Fruits'}" [routerLink]="['/Catogery/Fruits']">Fruits</a></li>
-            <li><a class="dropdown-item"  [queryParams]="{type:'Vegetables'}" [routerLink]="['/Catogery/Vegetables']">Vegetables</a></li>
-            <li><a class="dropdown-item" [queryParams]="{type:'Bakery'}" [routerLink]="['/Catogery/Bakerys']">Bakery</a></li>
+            <li><a class="dropdown-item"  [queryParams]="{type:'fruits'}" [routerLink]="['/Catogery/Fruits']">Fruits</a></li>
+            <li><a class="dropdown-item"  [queryParams]="{type:'vegetables'}" [routerLink]="['/Catogery/Vegetables']">Vegetables</a></li>
+            <li><a class="dropdown-item" [queryParams]="{type:'bakerys'}" [routerLink]="['/Catogery/Bakerys']">Bakery</a></li>
           </ul>
         </li>
         <li class="nav-item">
@@ -27,7 +27,6 @@
       <span class="navbar-text">
         <a id="change" class="nav-link" routerLink="Login" *ngIf="!login()">Login</a>
         <a class="nav-link" routerLink="About" *ngIf="login()">Profile</a>
-        <!-- <ng-template #Logined> <a class="nav-bar" (click)="Logout()">Log Out</a></ng-template> -->
       </span>
       <span class="navbar-text">
         <a class="nav-link" routerLink="Signin" *ngIf="!login()">Sign Up</a>

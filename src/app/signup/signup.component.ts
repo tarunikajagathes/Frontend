@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators,FormBuilder, Validator } from '@angular/forms';
 import { Router } from '@angular/router';
+import { confirmPassword } from '../services/password.service';
 import { UserService } from '../services/user.service';
-import { AsyncValidator, AsyncValidatorFn } from '@angular/forms';
+import { ValidateService } from '../services/validate.service';
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -10,43 +12,41 @@ import { AsyncValidator, AsyncValidatorFn } from '@angular/forms';
 })
 export class SignupComponent {
 
-  signinForm: FormGroup = new FormGroup({
-    email: new FormControl(null, [Validators.email, Validators.required]),
-    username: new FormControl(null, [Validators.required, Validators.pattern("[a-z,A-z]*")]),
-    phone: new FormControl(null, [Validators.minLength(10), Validators.maxLength(10), Validators.required, Validators.pattern("[0-9]{10}")]),
-    address: new FormControl(null, [Validators.maxLength(100), Validators.required]),
-    password: new FormControl(null, [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$")]),
-    cpassword: new FormControl(null, Validators.required)
+  constructor(private router: Router, private service: UserService,private fb:FormBuilder,private validate:ValidateService) { }
+
+  signinForm: FormGroup =this.fb.group({
+    email:[null, [Validators.email, Validators.required]],
+    username:[null,[Validators.required, Validators.pattern("[a-z,A-z]*")]],
+    phone: [null,[Validators.minLength(10), Validators.maxLength(10), Validators.required, Validators.pattern("[0-9]{10}")]],
+    address:[null,[Validators.maxLength(100), Validators.required]],
+    password:[null,[Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$")]],
+    cpassword:[null, [Validators.required]],
+  },{
+    validator:this.validate.checkPassword("password","cpassword")
   })
 
-  constructor(private router: Router, private service: UserService) { }
-
   emailAlredyExist = "";
-  studentEmailcheck = "";
+  studentEmailcheck:any;
   
   public moveToLogin() {
     this.router.navigate(['/Login']);
   }
   public signin() {
-    if (this.signinForm.invalid) {
-      this.signinForm.disable;
-    }
     const data = { email: this.signinForm.value.email, username: this.signinForm.value.username, phone: this.signinForm.value.phone, address: this.signinForm.value.address, password: btoa(this.signinForm.value.password) }
     this.service.sign(data)
       .subscribe(
         data => {
-          alert("Sucessfully signined!!")
           this.router.navigate(['/Login']);
         }
       )
+      alert("Sucessfully signined!!");
   }
  
   public emailCheckUnique() {
     this.service.emailCheckUnique(this.signinForm.value.email).subscribe(res => {
       this.studentEmailcheck = res;
-      if (this.studentEmailcheck.length > 3) {
+      if (this.studentEmailcheck.data!="no data") {
         this.emailAlredyExist = "Someone already has this email. Try another?";
-        this.signinForm.invalid;
       }
       else {
         this.emailAlredyExist = "";

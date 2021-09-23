@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {catchError, tap} from 'rxjs/operators'
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MyInterceptorService implements HttpInterceptor {
 
-  constructor( private spinner: NgxSpinnerService) { }
+  constructor( private spinner: NgxSpinnerService , private router:Router) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     var token = sessionStorage.getItem('currentUser');
     this.spinner.show();
@@ -22,6 +23,10 @@ export class MyInterceptorService implements HttpInterceptor {
       catchError((error:any)=>{
         if(error.statusText!='Unknown Error'){
           this.spinner.hide();
+        }
+        if(error.status==401){
+          console.log("Inside 401");
+          this.router.navigate(['']);
         }
         return throwError(error);
       })

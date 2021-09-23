@@ -19,7 +19,7 @@ const routes: Routes = [
   {path:"About",loadChildren:()=>import("./about/about.module").then((m)=>m.AboutModule)},
   {path:"Catogery/Fruits",component:CatogeryComponent},
   {path:"Catogery/Vegetables",component:CatogeryComponent},
-  {path:"Catogery/Bakerys",component:CatogeryComponent},
+  {path:"Catogery/Bakerys",component:CatogeryComponent}
   ];
 
 @NgModule({

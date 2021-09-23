@@ -17,11 +17,12 @@ export class CheckoutComponent implements OnInit {
   empty: boolean = false;
   uItems: any;
   total: Number = 0;
-  public userItems() {
-    this.service.userItems(sessionStorage.getItem('email')).subscribe(res => {
+  private userItems() {
+    this.service.userItems().subscribe(res => {
       this.uItems = res;
-      if (this.uItems.length == 0) {
+      if (this.uItems.length == 0||this.uItems[0].items.length==0) {
         this.empty = true;
+        
       }
       else {
         this.empty = false;
@@ -32,13 +33,15 @@ export class CheckoutComponent implements OnInit {
           }
         }
       }
-    });
+    }, (error) => {
+      console.log(error);
+      });
   }
 
   public cout() {
-   this.service.placeOrder(sessionStorage.getItem('email')).subscribe();
+   this.service.placeOrder().subscribe(err=>console.log(err));
     alert("Order placed Sucessfully!!");
-   this.service.clearBasket(sessionStorage.getItem('email')).subscribe();
+   this.service.clearBasket().subscribe(err=>console.log(err));
     this.userItems();
     this.route.navigate(['']);
   }

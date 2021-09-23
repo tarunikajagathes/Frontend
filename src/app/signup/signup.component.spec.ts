@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { UserService } from '../services/user.service';
 import { SignupComponent } from './signup.component';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 describe('SignupComponent', () => {
   let component: SignupComponent;
@@ -8,7 +11,9 @@ describe('SignupComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SignupComponent ]
+      imports:[FormsModule,ReactiveFormsModule,RouterTestingModule],
+      declarations: [ SignupComponent ],
+      providers:[HttpClient,HttpHandler,UserService]
     })
     .compileComponents();
   });
@@ -21,5 +26,15 @@ describe('SignupComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('form invalid when empty', ()=>{
+    expect(component.signinForm.valid).toBeFalsy();
+  });
+
+  it('email field validity', () => {
+    let email = component.signinForm.controls['email'];
+    expect(email.valid).toBeFalsy();
+    
   });
 });

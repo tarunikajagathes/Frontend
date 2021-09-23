@@ -1,4 +1,3 @@
-import { QueryValueType } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
@@ -20,8 +19,8 @@ export class BasketComponent implements OnInit {
   value: any;
   ivalue: any;
   dvalue: any;
-  public userItems() {
-    this.service.userItems(sessionStorage.getItem('email')).subscribe(res => {
+  private userItems() {
+    this.service.userItems().subscribe(res => {
       this.uItems = res;
       if (this.uItems.length == 0) {
         this.noitems = "Empty Basket!!"
@@ -34,30 +33,18 @@ export class BasketComponent implements OnInit {
           this.noitems = "";
         }
       }
-    })
+    }, (error) => {
+      console.log(error);
+      })
   }
  
   public remove(name: any) {
-    for (let detail of this.uItems) {
-      for (let item of detail.items) {
-        if (name == item.name) {
-          this.value = { name: item.name, image: item.image, qty: item.qty, price: item.price };
-        }
-      }
-    }
-    this.service.Rvalue(this.value, sessionStorage.getItem('email')).subscribe();
+    this.service.Rvalue(name).subscribe(err=>{console.log(err);});
     this.userItems();
   }
  
   public inc(name: any) {
-    for (let detail of this.uItems) {
-      for (let item of detail.items) {
-        if (name == item.name) {
-          this.ivalue = { name: item.name, qty: item.qty };
-        }
-      }
-    }
-    this.service.Incvalue(this.ivalue, sessionStorage.getItem('email')).subscribe();
+    this.service.Incvalue(name).subscribe();
     this.userItems();
   }
   
@@ -70,13 +57,13 @@ export class BasketComponent implements OnInit {
       }
     }
     if (this.dvalue.qty != 0) {
-      this.service.decvalue(this.dvalue, sessionStorage.getItem('email')).subscribe();
+      this.service.decvalue(name).subscribe();
       this.userItems();
     }
 
   }
   public clear() {
-    this.service.clearBasket(sessionStorage.getItem('email')).subscribe();
+    this.service.clearBasket().subscribe(err=>console.log(err));
     this.userItems();
   }
   public checkout() {

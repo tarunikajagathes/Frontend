@@ -6,21 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Frontend';
+  title = 'Fresh Choice';
   noUser:boolean=true;
 
 
   Logout(){
     sessionStorage.removeItem('currentUser');
-    sessionStorage.removeItem('email');
     this.noUser=true;
   }
 
   public login(){
     return sessionStorage.getItem('currentUser')
-  }
-  public reload(){
-    window.location.reload
   }
     
 }

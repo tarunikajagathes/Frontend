@@ -12,8 +12,8 @@ export class CatogeryComponent implements OnInit {
 
   constructor(private router: ActivatedRoute, private service: UserService, private route: Router) { }
 
-  delivery=Constants.delvery;
-  type: any;
+  delivery = Constants.delvery;
+  type: string = "";
   details: any;
   Sid: Number = 0;
   value: any;
@@ -24,15 +24,19 @@ export class CatogeryComponent implements OnInit {
   added: boolean = false;
 
   ngOnInit() {
-    this.router.queryParams.subscribe(params => {
-      this.type = params['type'];
-      this.data();
-    });
+    if (this.router.queryParams != undefined) {
+      this.router.queryParams.subscribe(params => {
+        this.type = params['type'];
+        this.data();
+      });
+    }
   }
 
-  public data() {
+  private data() {
     this.service.data(this.type).subscribe(res => {
       this.details = res;
+    }, (error) => {
+      console.log(error);
     })
   }
   public add() {
@@ -51,7 +55,8 @@ export class CatogeryComponent implements OnInit {
           this.value = { name: detail.name, image: detail.image, qty: 1, price: detail.price };
         }
       }
-      this.service.Ivalue(this.value, sessionStorage.getItem('email')).subscribe(res => { alert("Added to Cart!!") });
+      this.service.Ivalue(this.value).subscribe();
+      alert("Added to Cart!!")
     }
   }
   public high() {
@@ -86,6 +91,8 @@ export class CatogeryComponent implements OnInit {
       else {
         this.noitems = "";
       }
+    },err=>{
+      console.log(err);
     })
   }
 }

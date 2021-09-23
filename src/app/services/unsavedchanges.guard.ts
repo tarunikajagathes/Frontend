@@ -11,10 +11,10 @@ export interface CanComponentLeave {
 export class UnsavedchangesGuard implements CanDeactivate<CanComponentLeave> {
   canDeactivate(
     component: CanComponentLeave) {
-    if (component.canLeave) {
-      return component.canLeave();
+    if (component.canLeave()) {
+      return true;
     }
-    return true;
+    return false;
   }
 
 }
