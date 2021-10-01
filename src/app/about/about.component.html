@@ -7,17 +7,17 @@
         <div class="form-group">
             <label>First Name:</label>
             <input formControlName="username" type="text" class="form-control" id="Name" aria-describedby="UserHelp" value={{this.Name}} placeholder="Name">
-            <small id="UserHelp" style="color: red;" *ngIf="signinForm.controls.username.invalid&&signinForm.controls.username.dirty">Required!!</small>
+            <small style="color: red;" *ngIf="signinForm.controls.username.invalid&&signinForm.controls.username.dirty">Required!!</small>
         </div>
         <div class="form-group">
             <label>Phone Number:</label>
             <input formControlName="phone" type="text" class="form-control" id="phone" aria-describedby="UserHelp" placeholder="Number" value={{this.number}}>
-            <small id="UserHelp"  style="color: red;" *ngIf="signinForm.controls.phone.invalid&&signinForm.controls.phone.dirty">Invalid Phone number!!</small>
+            <small style="color: red;" *ngIf="signinForm.controls.phone.invalid&&signinForm.controls.phone.dirty">Invalid Phone number!!</small>
         </div>
         <div class="form-group">
             <label>Address:</label>
             <textarea formControlName="address" type="text" class="form-control" id="address" aria-describedby="UserHelp" placeholder="Address" value="{{this.place}}"></textarea>
-            <small id="UserHelp"  style="color: red;" *ngIf="signinForm.controls.address.invalid&&signinForm.controls.address.dirty">Address Invalid!!</small>
+            <small style="color: red;" *ngIf="signinForm.controls.address.invalid&&signinForm.controls.address.dirty">Address Invalid!!</small>
         </div>
         <br>
         <div class="form-group" style="text-align:center">

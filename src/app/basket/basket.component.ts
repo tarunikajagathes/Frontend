@@ -44,7 +44,7 @@ export class BasketComponent implements OnInit {
   }
  
   public inc(name: any) {
-    this.service.Incvalue(name).subscribe();
+    this.service.Incvalue(name).subscribe(err=>{console.log(err);});
     this.userItems();
   }
   
@@ -57,7 +57,7 @@ export class BasketComponent implements OnInit {
       }
     }
     if (this.dvalue.qty != 0) {
-      this.service.decvalue(name).subscribe();
+      this.service.decvalue(name).subscribe(err=>{console.log(err);});
       this.userItems();
     }
 
