@@ -35,8 +35,6 @@ export class CatogeryComponent implements OnInit {
   private data() {
     this.service.data(this.type).subscribe(res => {
       this.details = res;
-    }, (error) => {
-      console.log(error);
     })
   }
   public add() {

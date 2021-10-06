@@ -15,9 +15,22 @@
       </tr>
     </tbody>
   </table>
+  <div style="width: 200px; padding:2px">
+    <form class="form-group" [formGroup]="checkout">
+      <label for="recipient-name" class="col-form-label"><b>Address:</b></label>
+      <textarea class="form-control" id="recipient-name" formControlName="address"value="{{this.place}}" (input)="newAddress()"></textarea><small><b><i>You can edit your address</i></b></small>
+      <div class="form-group">
+        <label for="message-text" class="col-form-label"><b>Payment Mode:</b></label><br>
+        <input type="radio" name="mode" checked (change)="detectedChange()">
+        <label>Cash on Delivery</label><br>
+        <input type="radio" name="mode" (change)="detectedChange()">
+        <label>Credit card</label>
+      </div>
+    </form>
+  </div>
   <div style="float:left; padding-right:5%">
     <h5>Total: Rs.{{total}}</h5>
     <button (click)="cout()" [disabled]="empty" class="btn btn-dark"
-      style="background-color: cadetblue;color: white; border:white; box-shadow: 1px 1px 1px 1px white;">CheckOut</button>
+      style="background-color: cadetblue;color: white; border:white; box-shadow: 1px 1px 1px 1px white;">Continue</button>
   </div>
 </div>

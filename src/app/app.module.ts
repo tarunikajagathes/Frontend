@@ -21,6 +21,9 @@ import { CatogeryComponent } from './catogery/catogery.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
+import { FinalComponent } from './final/final.component'
 
 
 @NgModule({
@@ -31,7 +34,9 @@ import { RouterModule } from '@angular/router';
     LoginComponent,
     SignupComponent,
     CheckoutComponent,
-    CatogeryComponent
+    CatogeryComponent,
+    DialogComponent,
+    FinalComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +46,8 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     HttpClientModule,
     NgxSpinnerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [UserService,AuthGuardService,UserLoginedService,UnsavedchangesGuard,UserNotloginedService,
     {provide:HTTP_INTERCEPTORS,useClass:MyInterceptorService,multi:true}],

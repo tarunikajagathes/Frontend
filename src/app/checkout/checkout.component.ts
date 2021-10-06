@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import {MatDialog} from '@angular/material/dialog'
+import { DialogComponent } from '../dialog/dialog.component';
+import { FinalComponent } from '../final/final.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-checkout',
@@ -9,14 +13,29 @@ import { UserService } from '../services/user.service';
 })
 export class CheckoutComponent implements OnInit {
 
-  constructor(private service: UserService, private route: Router) { }
+  constructor(private service: UserService, private route: Router,private dialog: MatDialog,private fb:FormBuilder) { }
 
   ngOnInit(): void {
     this.userItems();
+    this.userData();
   }
   empty: boolean = false;
   uItems: any;
   total: Number = 0;
+  details:any;
+place:any;
+credit:boolean=false;
+
+checkout:FormGroup=this.fb.group({
+  address:[null,[Validators.required,Validators.maxLength(100)]]
+})
+  private userData() {
+    this.service.userdetails().subscribe(res => {
+      this.details = res;
+      this.place = this.details.data[0].address;
+      sessionStorage.setItem("address",this.place);
+    })
+  }
   private userItems() {
     this.service.userItems().subscribe(res => {
       this.uItems = res;
@@ -33,16 +52,30 @@ export class CheckoutComponent implements OnInit {
           }
         }
       }
-    }, (error) => {
-      console.log(error);
-      });
+    });
+  }
+
+  public detectedChange(){
+    if(this.credit==true){
+      this.credit=false;
+    }
+    else{
+      this.credit=true;
+    }
+   
+  }
+
+  public newAddress(){
+    sessionStorage.setItem("address",this.checkout.controls.address.value);
   }
 
   public cout() {
-   this.service.placeOrder().subscribe(err=>console.log(err));
-    alert("Order placed Sucessfully!!");
-   this.service.clearBasket().subscribe(err=>console.log(err));
-    this.userItems();
-    this.route.navigate(['']);
+    if(this.credit==true){
+      this.dialog.open(DialogComponent,{height:'455px',width:'455px',disableClose:true});
+    }
+    else{
+      this.dialog.open(FinalComponent,{height:'200px',width:'455px',disableClose:true})
+      this.service.placeOrder(this.place,"not paid").subscribe();
+    }
   }
 }

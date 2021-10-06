@@ -33,18 +33,16 @@ export class BasketComponent implements OnInit {
           this.noitems = "";
         }
       }
-    }, (error) => {
-      console.log(error);
-      })
+    })
   }
  
   public remove(name: any) {
-    this.service.Rvalue(name).subscribe(err=>{console.log(err);});
+    this.service.Rvalue(name).subscribe();
     this.userItems();
   }
  
   public inc(name: any) {
-    this.service.Incvalue(name).subscribe(err=>{console.log(err);});
+    this.service.Incvalue(name).subscribe();
     this.userItems();
   }
   
@@ -57,13 +55,13 @@ export class BasketComponent implements OnInit {
       }
     }
     if (this.dvalue.qty != 0) {
-      this.service.decvalue(name).subscribe(err=>{console.log(err);});
+      this.service.decvalue(name).subscribe();
       this.userItems();
     }
 
   }
   public clear() {
-    this.service.clearBasket().subscribe(err=>console.log(err));
+    this.service.clearBasket().subscribe();
     this.userItems();
   }
   public checkout() {

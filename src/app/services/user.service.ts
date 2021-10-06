@@ -46,8 +46,8 @@ export class UserService {
   public clearBasket() {
     return this.http.delete(`${environment.baseUrl}/user/basket/clearbasket`);
   }
-  public placeOrder() {
-    return this.http.get(`${environment.baseUrl}/user/basket/checkout`);
+  public placeOrder(place:any,amount:any) {
+    return this.http.post(`${environment.baseUrl}/user/basket/checkout`,{place:place,amount:amount});
   }
   public filterCatogery(range: any, high: any, low: any, type: any) {
     return this.http.put(`${environment.baseUrl}/catogery/filter`, { high: high, low: low, range: range, type: type });

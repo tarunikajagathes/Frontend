@@ -14,9 +14,9 @@ export class SignupComponent {
   constructor(private router: Router, private service: UserService,private fb:FormBuilder,private validate:ValidateService) { }
 
   signinForm: FormGroup =this.fb.group({
-    email:[null, [Validators.email, Validators.required]],
-    username:[null,[Validators.required, Validators.pattern("[a-z,A-z]*")]],
-    phone: [null,[Validators.minLength(10), Validators.maxLength(10), Validators.required, Validators.pattern("[0-9]{10}")]],
+    email:[null, [Validators.email, Validators.required,Validators.pattern(/(\b^(?:([a-z])(?!\2{2})){3,}(?:([0-9._])(?!\3{2})){0,4}@(?:([a-z])(?!\4{2})){5,}\.(?:([a-z])(?!\5{2})){2,4}$\b)/)]],
+    username:[null,[Validators.required, Validators.pattern(/(\b(?:([A-Za-z])(?!\2{2}))+\b)/),Validators.minLength(3)]],
+    phone: [null,[Validators.minLength(10), Validators.maxLength(10), Validators.required, Validators.pattern("[6-9][0-9]{9}")]],
     address:[null,[Validators.maxLength(100), Validators.required]],
     password:[null,[Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$")]],
     cpassword:[null, [Validators.required]],

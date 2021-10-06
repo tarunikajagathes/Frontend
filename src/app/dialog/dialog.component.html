@@ -1,0 +1,56 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">Payment</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color: grey;" (click)="closeDialog()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="payment">
+  <br>
+<div class="form-group">
+  <label for="cc-number" class="control-label">CARD NUMBER</label>
+  <input id="cc-number" type="tel" formControlName="cardnumber" class="input-lg form-control cc-number" autocomplete="cc-number" required>
+  <small style="color:red" *ngIf="payment.controls.cardnumber.touched&&!payment.controls.cardnumber.dirty">Card Number
+    Required!!</small>
+  <small id="UserHelp" style="color: red;"
+    *ngIf="payment.controls.cardnumber.errors?.minlength">Minimum length should be 15</small>
+    <small id="UserHelp" style="color: red;"
+    *ngIf="payment.controls.cardnumber.errors?.card">Invalid number</small>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="cc-exp" class="control-label">CARD EXPIRY</label>
+      <input id="cc-exp" type="tel" formControlName="cardexpiry" class="input-lg form-control cc-exp" autocomplete="cc-exp" placeholder="MM /YY"
+        required>
+        <small style="color:red" *ngIf="payment.controls.cardexpiry.touched&&!payment.controls.cardexpiry.dirty">Card Expiry
+          Required!!</small>
+        <small id="UserHelp" style="color: red;"
+          *ngIf="payment.controls.cardexpiry.errors?.pattern">Format should be MM/YYYY</small>
+    </div>
+  </div>
+  <br>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="cc-cvc" class="control-label">CARD CVC</label>
+      <input id="cc-cvc" type="tel" formControlName="cvc" class="input-lg form-control cc-cvc" autocomplete="off" required>
+      <small style="color:red" *ngIf="payment.controls.cvc.touched&&!payment.controls.cvc.dirty">CVC
+        Required!!</small>
+      <small id="UserHelp" style="color: red;"
+        *ngIf="payment.controls.cvc.errors?.pattern">Inalid cvc</small>
+    </div>
+  </div>
+</div>
+<br>
+<div class="form-group">
+  <label for="numeric" class="control-label">CARD HOLDER NAME</label>
+  <input type="text" formControlName="name" class="input-lg form-control"> </div>
+  <small style="color:red" *ngIf="payment.controls.name.touched&&!payment.controls.name.dirty">Name
+    Required!!</small>
+  <small id="UserHelp" style="color: red;"
+    *ngIf="payment.controls.name.errors?.pattern">Shold be in capital letters</small>
+<br>
+<div class="form-group">
+  <input [disabled]="payment.invalid" value="MAKE PAYMENT" type="button" class="btn btn-success btn-lg form-control" style="font-size: .8rem;" (click)="move()">
+</div>
+</form>
